@@ -6,6 +6,8 @@ import cors from "cors";
 import data from "./data.js";
 import * as utilities from "./utils/functions.js"
 import {isInvalidId} from "./utils/functions.js";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./swagger.json" assert { type: 'json'};
 
 app.use(bodyParser.json()).use(cors())
 
@@ -58,6 +60,9 @@ app.get("/api/v1/visits", (req,res) => {
         return res.json(visits)
     }
 );
+
+app.use("/api/v1/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 app.get("/healthcheck", (req, res) => {
    let healthcheck = {
        uptime: process.uptime(),
@@ -74,7 +79,7 @@ app.get("/healthcheck", (req, res) => {
 });
 
 app.listen(PORT, () =>
-    console.log(`Hello World, I'm listening http://localhost:${PORT}/`)
+    console.log(`Hello World, I'm listening http://localhost:${PORT}/api/v1/docs`)
 );
 
 export default app; // for testing purposes only
