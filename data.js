@@ -21,6 +21,10 @@ const data = {
         {
             id: 2,
             name: 'Robert Kidman'
+        },
+        {
+            id: 3,
+            name: 'Shawn McCarthy'
         }
     ],
     visits:
